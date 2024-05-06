@@ -31,6 +31,7 @@ function App() {
   return (
     <div>
       <Search search={search} onClick={onClick} HandleChange={HandleChange} />
+      {serverError && <h1>{serverError}</h1>}
       <CardList />
     </div>
   );
