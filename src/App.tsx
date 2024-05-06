@@ -9,7 +9,7 @@ import { searchCompanies } from "./api";
 function App() {
 
   const [search, setSearch] = useState<string>("");
-  const [serverError, setServerError] = useState<string>("");
+  const [serverError, setServerError] = useState<string | null>(null);
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
 
   const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +32,7 @@ function App() {
     <div>
       <Search search={search} onClick={onClick} HandleChange={HandleChange} />
       {serverError && <h1>{serverError}</h1>}
-      <CardList />
+      <CardList searchResult={searchResult}/>
     </div>
   );
 }
