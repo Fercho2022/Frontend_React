@@ -1,4 +1,9 @@
-import { ChangeEvent, SyntheticEvent, useState } from "react";
+import {
+  BaseSyntheticEvent,
+  ChangeEvent,
+  SyntheticEvent,
+  useState,
+} from "react";
 import "./App.css";
 
 import CardList from "./Components/CardList/CardList";
@@ -20,10 +25,19 @@ function App() {
 
   const onPortfolioCreate = (e: any) => {
     e.preventDefault();
-   const exists= portfolioValues.find((value)=>value===e.target[0].value)
+    const exists = portfolioValues.find((value) => value === e.target[0].value);
     if (exists) return;
-   const updatePortfolio = [...portfolioValues, e.target[0].value];
+    const updatePortfolio = [...portfolioValues, e.target[0].value];
     setPortfolioValues(updatePortfolio);
+  };
+
+  const onPortfolioDelete = (e: BaseSyntheticEvent) => {
+    e.preventDefault();
+    const removed = portfolioValues.filter((value) => {
+      return value !== e.target[0].value;
+    });
+
+    setPortfolioValues(removed);
   };
 
   const onSearchSubmit = async (e: SyntheticEvent) => {
@@ -45,7 +59,10 @@ function App() {
         HandleSearchChange={HandleSearchChange}
       />
       {serverError && <h1>{serverError}</h1>}
-      <ListPortfolio portfolioValues={portfolioValues}/>
+      <ListPortfolio
+        portfolioValues={portfolioValues}
+        onPortfolioDelete={onPortfolioDelete}
+      />
       <CardList
         searchResult={searchResult}
         onPortfolioCreate={onPortfolioCreate}
