@@ -23,7 +23,7 @@ const RatioList = ({ config, data }: Props) => {
             </p>
           </div>
           <div className="inline-flex items-center text-base font-semibold text">
-            {row.render(data)}
+            {row.render(data[0])}
           </div>
         </div>
       </li>

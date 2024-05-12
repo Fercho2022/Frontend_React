@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch } from "./company";
+import { CompanyBalanceSheet, CompanyCashFlow, CompanyIncomeStatement, CompanyKeyMetrics, CompanyProfile, CompanySearch } from "./company";
 
 export const searchCompanies = async (query: string) => {
   try {
@@ -45,6 +45,29 @@ export const getIncomeStatement = async (query: string) => {
     const data = await axios.get<CompanyIncomeStatement[]>(
       `https://financialmodelingprep.com/api/v3/income-statement/${query}?limit=40&apikey=I5UtPTq7OR28n8LXnknZIUBjAnEc5cyL`
     );
+    return data;
+  } catch (error: any) {
+    console.log("error message from API: ", error.message);
+  }
+};
+
+export const getBalanceSheet = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyBalanceSheet[]>(
+      `https://financialmodelingprep.com/api/v3/balance-sheet-statement/${query}?limit=40&apikey=I5UtPTq7OR28n8LXnknZIUBjAnEc5cyL`
+    );
+    return data;
+  } catch (error: any) {
+    console.log("error message from API: ", error.message);
+  }
+};
+
+export const getCashFlowStatement = async (query: string) => {
+  try {
+    const data = await axios.get<CompanyCashFlow[]>(
+      `https://financialmodelingprep.com/api/v3/cash-flow-statement/${query}?limit=40&apikey=I5UtPTq7OR28n8LXnknZIUBjAnEc5cyL`
+    );
+    console.log(data);
     return data;
   } catch (error: any) {
     console.log("error message from API: ", error.message);
