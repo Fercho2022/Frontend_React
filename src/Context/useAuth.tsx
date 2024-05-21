@@ -55,7 +55,7 @@ export const UserProvider = ({ children }: Props) => {
           localStorage.setItem("user", JSON.stringify(userObj));
           setToken(res?.data.token!);
           setUser(userObj!);
-          toast.success("Login Success!");
+          toast.success("Register Success!");
           navigate("/search");
         }
       })
@@ -87,10 +87,11 @@ export const UserProvider = ({ children }: Props) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeitem("user");
+    localStorage.removeItem("user");
     setUser(null);
     setToken("");
     navigate("/");
+    
   };
 
   return (
